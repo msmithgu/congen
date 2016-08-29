@@ -2,7 +2,9 @@
   "name": "congen",
   "version": "1.0.0",
   "description": "Template based content generator.",
-  "main": "index.js",
+  "bin": {
+    "congen": "bin/congen.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
