@@ -1,0 +1,19 @@
+{
+  "name": "congen",
+  "version": "1.0.0",
+  "description": "Template based content generator.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/msmithgu/congen.git"
+  },
+  "author": "Mark Smith-Guerrero <msmithgu@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/msmithgu/congen/issues"
+  },
+  "homepage": "https://github.com/msmithgu/congen#readme"
+}
