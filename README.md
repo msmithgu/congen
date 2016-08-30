@@ -25,7 +25,9 @@ Then use congen to generate as many as you'd like:
 
 ## License
 
-[ISC](LICENSE)
+Copyright (c) 2016 Mark Smith-Guerrero <msmithgu@gmail.com>
+
+Licensed under the [ISC](LICENSE) License.
 
 ## References
 
