@@ -8,23 +8,37 @@ var glob = require('glob')
 var path = require('path')
 
 function main() {
-  processFiles()
+  //processFiles()
+  deleteFiles()
+}
+
+function deleteFiles() {
+  glob('**/*-_CONGEN.*', function (err, filepaths) {
+    if (err) {
+      console.error('Error finding congen generated files: ', err)
+    } else {
+      _.map(filepaths, function (filepath) {
+        console.log('Deleting ' + filepath)
+        fs.unlinkSync(filepath)
+      })
+    }
+  })
 }
 
 function processFiles() {
   glob('**/*.congen', function (err, filepaths) {
-      if (err) {
-        console.error('Error finding congen files: ', err)
-      } else {
-        _.map(filepaths, function (filepath) {
-          processFile(filepath)
-        })
-      }
+    if (err) {
+      console.error('Error finding congen templates: ', err)
+    } else {
+      _.map(filepaths, function (filepath) {
+        processFile(filepath)
+      })
+    }
   })
 }
 
 function processFile(filepath) {
-  console.log('*** Processing ' + filepath + '..')
+  console.log('Processing ' + filepath + '..')
 
   var dirname = path.dirname(filepath)
   var ext = getCongenExt(filepath)
@@ -41,9 +55,9 @@ function processFile(filepath) {
         var basename = formatBasename(content) + ext
         var pathname = path.join(dirname, basename)
 
-        console.log()
-        console.log(pathname)
-        console.log(content.body)
+        console.log('- generating ' + pathname)
+        fs.writeFileSync(pathname, content.body);
+        //console.log(content.body)
       }
     }
   })
