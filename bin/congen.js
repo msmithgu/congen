@@ -110,14 +110,29 @@ function genContent(template, dateOffset) {
       var token = template.substr(start + open.length, end - start - close.length);
       var method = _.trim(token.replace(close, '').replace(open, ''))
 
+      var methodNameMatch = method.match(/^[^\s]*/)
+      var methodName = methodNameMatch ? methodNameMatch[0] : 'NO_METHOD_NAME'
+
+      var methodArgsMatch = method.match(/^[^\s]+\s*(.*)/)
+      var methodArgs = methodArgsMatch ? methodArgsMatch[1] : 'NO_METHOD_NAME'
+
       var result
-      switch(method) {
+      switch(methodName) {
         case 'title':
           result = faker.company.catchPhrase()
           title = result
           break
+        case 'date':
+          result = dateFormat(date, 'yyyy-mm-dd HH:MM:ss o')
+          break;
+        case 'lorem.paragraphs':
+          result = faker.lorem.paragraphs().replace(/\n/g, "\n\n")
+          break;
+        case 'fake':
+          result = faker.fake(methodArgs)
+          break;
         default:
-          result = method + '->RESULT'
+          result = ''
       }
       res = template.replace(open + token + close, result)
 

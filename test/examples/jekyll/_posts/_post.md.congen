@@ -5,4 +5,4 @@ date:   <{ date }>
 categories: congen
 ---
 
-<{ lorem 15 3 }>
+<{ lorem.paragraphs }>
