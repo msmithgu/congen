@@ -1,15 +1,66 @@
 #!/usr/bin/env node
 
-var _ = require('lodash')
-var dateFormat = require('dateformat')
-var faker = require('faker')
-var fs = require('fs')
-var glob = require('glob')
-var path = require('path')
+const _ = require('lodash')
+const dateFormat = require('dateformat')
+const faker = require('faker')
+const fs = require('fs')
+const glob = require('glob')
+const meow = require('meow')
+const path = require('path')
+
+const cli = meow(`
+  Usage
+    $ congen <command>
+
+  Commands
+    generate, g      Generates content files based on congen templates it finds in path
+    delete, d        Deletes any congen generated content files it finds in path
+
+  Options
+    --help, -h       Show this help
+    --version, -v    Current version of package
+
+  Examples
+    $ congen --version
+    $ congen generate
+    $ congen delete
+`, {
+  alias: {
+    h: 'help',
+    v: 'version'
+  }
+})
 
 function main() {
   //processFiles()
-  deleteFiles()
+  //deleteFiles()
+  //console.log(cli)
+  if (cli.input.length !== 1) {
+    displayHelp()
+  } else {
+    var command = cli.input[0]
+    console.log('Running ' + command + ' command!')
+    switch (command) {
+      case 'generate':
+        processFiles()
+        break
+      case 'g':
+        processFiles()
+        break
+      case 'delete':
+        deleteFiles()
+        break
+      case 'd':
+        deleteFiles()
+        break
+      default:
+        displayHelp()
+    }
+  }
+}
+
+function displayHelp() {
+  console.log(cli.help)
 }
 
 function deleteFiles() {
@@ -38,7 +89,7 @@ function processFiles() {
 }
 
 function processFile(filepath) {
-  console.log('Processing ' + filepath + '..')
+  console.log('Generating files from ' + filepath + '..')
 
   var dirname = path.dirname(filepath)
   var ext = getCongenExt(filepath)
@@ -55,7 +106,7 @@ function processFile(filepath) {
         var basename = formatBasename(content) + ext
         var pathname = path.join(dirname, basename)
 
-        console.log('- generating ' + pathname)
+        console.log(' - ' + pathname)
         fs.writeFileSync(pathname, content.body);
         //console.log(content.body)
       }
@@ -140,7 +191,7 @@ function genContent(template, dateOffset) {
           result = dateFormat(date, 'yyyy-mm-dd HH:MM:ss o')
           break;
         case 'lorem.paragraphs':
-          result = faker.lorem.paragraphs().replace(/\n/g, "\n\n")
+          result = faker.lorem.paragraphs().replace(/\n/g, '\n\n')
           break;
         case 'fake':
           result = faker.fake(methodArgs)
