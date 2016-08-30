@@ -21,7 +21,7 @@ Make a congen template file called **_posts/_post.md.congen** with the following
 
 Then use congen to generate as many as you'd like:
 
-    $ congen
+    $ congen g
 
 ## License
 
