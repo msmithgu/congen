@@ -60,7 +60,7 @@ function formatBasename(content) {
     _.kebabCase(_.join([
       d,
       content.title
-    ], '-'))
+    ], '-')) + '-_CONGEN'
   return title
 }
 
