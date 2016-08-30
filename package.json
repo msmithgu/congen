@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/msmithgu/congen#readme",
   "dependencies": {
-    "glob": "^7.0.6"
+    "dateformat": "^1.0.12",
+    "glob": "^7.0.6",
+    "lodash": "^4.15.0"
   }
 }
