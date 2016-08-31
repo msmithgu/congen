@@ -84,6 +84,11 @@ function processFiles(numToGen) {
 }
 
 function processFile(filepath, numToGen) {
+  var numToGen = parseInt(numToGen)
+  if (!numToGen || numToGen < 0) {
+    console.error('Invalid input expecting n to be a natural number')
+    process.exit(1)
+  }
   var plural = (numToGen > 1) ? 's' : ''
   console.log('Generating ' + numToGen + ' file' + plural + ' from ' + filepath + '..')
 
