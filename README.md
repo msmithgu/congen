@@ -21,15 +21,13 @@ Make a congen template file called **_posts/_post.md.congen** with the following
 
 Then use congen to generate as many as you'd like:
 
-    $ congen g
+    $ congen generate
 
-## License
+## Usage References
 
-Copyright (c) 2016 Mark Smith-Guerrero <msmithgu@gmail.com>
+- https://github.com/marak/Faker.js/
 
-Licensed under the [ISC](LICENSE) License.
-
-## References
+## Dev References
 
 - http://blog.npmjs.org/post/118810260230/building-a-simple-command-line-tool-with-npm
 - https://nodejs.org/dist/latest-v4.x/docs/api/
@@ -37,3 +35,9 @@ Licensed under the [ISC](LICENSE) License.
 - https://github.com/felixge/node-dateformat
 - https://github.com/marak/Faker.js/
 - https://github.com/tj/ejs/blob/master/ejs.js
+
+## License
+
+Copyright (c) 2016 Mark Smith-Guerrero <msmithgu@gmail.com>
+
+Licensed under the [ISC](LICENSE) License.
