@@ -1,6 +1,6 @@
 {
   "name": "congen",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Template based content generator.",
   "bin": {
     "congen": "bin/congen.js"
