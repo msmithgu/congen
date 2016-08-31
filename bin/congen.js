@@ -32,14 +32,10 @@ const cli = meow(`
 })
 
 function main() {
-  //processFiles()
-  //deleteFiles()
-  //console.log(cli)
   if (cli.input.length < 1) {
     displayHelp()
   } else {
     var command = cli.input[0]
-    console.log('Running ' + command + ' command!')
     switch (command) {
       case 'generate':
         var numToGen = cli.input[1] || 1
@@ -63,10 +59,14 @@ function deleteFiles() {
     if (err) {
       console.error('Error finding congen generated files: ', err)
     } else {
-      _.map(filepaths, function (filepath) {
-        console.log('Deleting ' + filepath)
-        fs.unlinkSync(filepath)
-      })
+      if (filepaths.length > 0) {
+        var plural = (filepaths.length > 1) ? 's' : ''
+        console.log('Deleting ' + filepaths.length + ' congen generated file' + plural + '..')
+        _.map(filepaths, function (filepath) {
+          console.log('    ' + filepath)
+          fs.unlinkSync(filepath)
+        })
+      }
     }
   })
 }
@@ -84,7 +84,8 @@ function processFiles(numToGen) {
 }
 
 function processFile(filepath, numToGen) {
-  console.log('Generating files from ' + filepath + '..')
+  var plural = (numToGen > 1) ? 's' : ''
+  console.log('Generating ' + numToGen + ' file' + plural + ' from ' + filepath + '..')
 
   var dirname = path.dirname(filepath)
   var ext = getCongenExt(filepath)
@@ -100,9 +101,8 @@ function processFile(filepath, numToGen) {
         var basename = formatBasename(content) + ext
         var pathname = path.join(dirname, basename)
 
-        console.log(' - ' + pathname)
+        console.log('    ' + pathname)
         fs.writeFileSync(pathname, content.body);
-        //console.log(content.body)
       }
     }
   })
