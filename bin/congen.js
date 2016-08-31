@@ -13,8 +13,8 @@ const cli = meow(`
     $ congen <command>
 
   Commands
-    generate, g      Generates content files based on congen templates it finds in path
-    delete, d        Deletes any congen generated content files it finds in path
+    generate         Generates content files based on congen templates it finds in path
+    delete           Deletes any congen generated content files it finds in path
 
   Options
     --help, -h       Show this help
@@ -44,13 +44,7 @@ function main() {
       case 'generate':
         processFiles()
         break
-      case 'g':
-        processFiles()
-        break
       case 'delete':
-        deleteFiles()
-        break
-      case 'd':
         deleteFiles()
         break
       default:
