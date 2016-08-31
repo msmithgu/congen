@@ -13,7 +13,7 @@ const cli = meow(`
     $ congen <command>
 
   Commands
-    generate         Generates content files based on congen templates it finds in path
+    generate [n]     Generates content files based on congen templates it finds in path
     delete           Deletes any congen generated content files it finds in path
 
   Options
@@ -35,14 +35,15 @@ function main() {
   //processFiles()
   //deleteFiles()
   //console.log(cli)
-  if (cli.input.length !== 1) {
+  if (cli.input.length < 1) {
     displayHelp()
   } else {
     var command = cli.input[0]
     console.log('Running ' + command + ' command!')
     switch (command) {
       case 'generate':
-        processFiles()
+        var numToGen = cli.input[1] || 1
+        processFiles(numToGen)
         break
       case 'delete':
         deleteFiles()
@@ -70,19 +71,19 @@ function deleteFiles() {
   })
 }
 
-function processFiles() {
+function processFiles(numToGen) {
   glob('**/*.congen', function (err, filepaths) {
     if (err) {
       console.error('Error finding congen templates: ', err)
     } else {
       _.map(filepaths, function (filepath) {
-        processFile(filepath)
+        processFile(filepath, numToGen)
       })
     }
   })
 }
 
-function processFile(filepath) {
+function processFile(filepath, numToGen) {
   console.log('Generating files from ' + filepath + '..')
 
   var dirname = path.dirname(filepath)
@@ -93,7 +94,6 @@ function processFile(filepath) {
       console.error('Error reading ' + filepath + ':', err)
     } else {
       var fib = fibSeq()
-      var numToGen = 3
 
       for (var i=0; i<numToGen; i++) {
         var content = genContent(template, fib())
