@@ -14,6 +14,7 @@ Make a congen template file called **_posts/_post.md.congen** with the following
     layout: post
     title:  <{ title }>
     date:   <{ date }>
+    author: <{ fake {{name.lastName}}, {{name.firstName}} {{name.suffix}} }>
     categories: congen
     ---
 
